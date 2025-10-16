@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Guess the Number Game</title>
+
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>🎯 Guess the Number</h1>
+        <p>I'm thinking of a number between 1 and 100!</p>
+
+        <input type="number" id="userGuess" placeholder="Enter your guess">
+        <br>
+        <button onclick="checkGuess()">Guess</button>
+
+        <p class="message" id="message"></p>
+        <p class="attempts" id="attempts"></p>
+    </div>
+
+    <!-- JavaScript section -->
+    <script>
+        // Generate random number between 1 and 100
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = Number(document.getElementById("userGuess").value);
+            const message = document.getElementById("message");
+            const attemptsDisplay = document.getElementById("attempts");
+            attempts++;
+
+            if (userGuess < 1 || userGuess > 100 || isNaN(userGuess)) {
+                message.textContent = "⚠️ Please enter a number between 1 and 100.";
+                message.style.color = "red";
+                return;
+            }
+
+            if (userGuess < secretNumber) {
+                message.textContent = "Too low! Try again.";
+                message.style.color = "#ff6b6b";
+            } else if (userGuess > secretNumber) {
+                message.textContent = "Too high! Try again.";
+                message.style.color = "#ff6b6b";
+            } else {
+                message.textContent = `🎉 Correct! The number was ${secretNumber}.`;
+                message.style.color = "#06d6a0";
+            }
+
+            attemptsDisplay.textContent = `Attempts: ${attempts}`;
+        }
+    </script>
+
+</body>
+</html>
